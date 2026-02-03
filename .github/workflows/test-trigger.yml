@@ -4,7 +4,19 @@ on:
   workflow_dispatch:
     inputs:
       triggered_by:
-        description: "Who triggered this workflow"
+        description: "GitHub user who triggered deployment"
+        required: true
+        type: string
+      owner:
+        description: "Repository owner or organization"
+        required: true
+        type: string
+      repo:
+        description: "Repository name"
+        required: true
+        type: string
+      branch:
+        description: "Branch name"
         required: true
         type: string
 
@@ -13,11 +25,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Say hello
+      - name: Print trigger details
         run: |
           echo "================================="
-          echo "Hello from GitHub Actions 👋"
-          echo "Triggered by: ${{ github.event.inputs.triggered_by }}"
-          echo "Repository: ${{ github.repository }}"
-          echo "Branch: ${{ github.ref }}"
+          echo "✅ Hello from GitHub Actions"
+          echo "Triggered by : ${{ github.event.inputs.triggered_by }}"
+          echo "Owner        : ${{ github.event.inputs.owner }}"
+          echo "Repository   : ${{ github.event.inputs.repo }}"
+          echo "Branch       : ${{ github.event.inputs.branch }}"
           echo "================================="
