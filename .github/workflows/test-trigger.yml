@@ -1,0 +1,23 @@
+name: Test Flask Trigger
+
+on:
+  workflow_dispatch:
+    inputs:
+      triggered_by:
+        description: "Who triggered this workflow"
+        required: true
+        type: string
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Say hello
+        run: |
+          echo "================================="
+          echo "Hello from GitHub Actions 👋"
+          echo "Triggered by: ${{ github.event.inputs.triggered_by }}"
+          echo "Repository: ${{ github.repository }}"
+          echo "Branch: ${{ github.ref }}"
+          echo "================================="
